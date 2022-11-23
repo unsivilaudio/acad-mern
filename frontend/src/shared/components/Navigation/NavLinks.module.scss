@@ -1,0 +1,20 @@
+.NavLinks {
+    list-style: none;
+
+    display: flex;
+    gap: 1rem;
+
+    .Item {
+        font-size: 1.8rem;
+        font-weight: 600;
+        padding: 1rem;
+        a {
+            transition: color 0.3s ease;
+        }
+
+        a:hover,
+        a[class='active'] {
+            color: #fe5481;
+        }
+    }
+}

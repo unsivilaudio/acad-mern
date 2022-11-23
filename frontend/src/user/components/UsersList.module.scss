@@ -1,0 +1,12 @@
+.UserList {
+    max-width: 60rem;
+    margin: 0 auto;
+    list-style: none;
+    padding: 2.4rem;
+    padding-bottom: 3.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    // align-items: center;
+}
