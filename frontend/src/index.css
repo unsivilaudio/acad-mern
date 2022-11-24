@@ -29,6 +29,20 @@ a {
     text-decoration: none;
 }
 
+button,
+input {
+    font: inherit;
+    border: none;
+    outline: none;
+    padding: 0.8rem 1.7rem;
+}
+
+button {
+    cursor: pointer;
+    color: #efedec;
+    background: #2d2d2d;
+}
+
 @media screen and (max-width: 75em) {
     html {
         font-size: 56.25%;
