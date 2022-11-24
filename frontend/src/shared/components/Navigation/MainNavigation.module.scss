@@ -1,18 +1,20 @@
 .MainNavigation {
+    position: relative;
     width: 100%;
     padding: 1.2rem 3rem;
     display: flex;
     align-items: center;
 
     .Toggler {
+        position: relative;
         color: inherit;
         cursor: pointer;
-        width: 2.4rem;
+        width: 3.6rem;
         height: 2.4rem;
-        margin-right: 1rem;
         background: transparent;
         border: none;
         outline: none;
+        z-index: 51;
 
         display: flex;
         flex-direction: column;
@@ -36,13 +38,21 @@
     }
 
     .Brand {
+        color: #1f1f1f;
+        background: #ededed;
         font-size: 3.2rem;
-        font-weight: 200;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.3rem;
+        border: 2px solid currentColor;
+        border-radius: 0.7rem 0 0.7rem 0;
+        padding: 0 0.7rem;
+        transform: rotate(-3deg) skewX(-15deg);
+        margin-left: auto;
     }
 
     .Nav {
+        display: none;
         margin-left: auto;
     }
 }
@@ -51,6 +61,10 @@
     .MainNavigation {
         .Toggler {
             display: none;
+        }
+
+        .Nav {
+            display: flex;
         }
     }
 }
