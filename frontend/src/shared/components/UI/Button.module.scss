@@ -1,0 +1,76 @@
+.Button {
+    font: inherit;
+    font-weight: 400;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 1rem 2.2rem;
+    box-shadow: var(--button-shadow-primary);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: var(--button-shadow-hover);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: none;
+        transform: translateY(-1px);
+    }
+
+    &.Primary,
+    &.Tertiary,
+    &.Danger {
+        color: var(--body-text-light);
+    }
+
+    &.Primary {
+        background-color: var(--button-primary-light);
+
+        &:hover {
+            background-color: var(--button-primary-dark);
+        }
+    }
+
+    &.Tertiary {
+        background-color: var(--button-tertiary-light);
+
+        &:hover {
+            background-color: var(--button-tertiary-dark);
+        }
+    }
+
+    &.Danger {
+        background-color: var(--button-danger-light);
+
+        &:hover {
+            background-color: var(--button-danger-dark);
+        }
+    }
+
+    &.Invert {
+        color: currentColor;
+        border: 1px solid currentColor;
+        box-shadow: none;
+
+        &:active,
+        &:hover {
+            box-shadow: none;
+            transform: none;
+        }
+    }
+
+    &[disabled],
+    &:disabled {
+        color: #ccc;
+        background: #777;
+        box-shadow: none;
+        transform: none;
+        cursor: not-allowed;
+
+        &:hover {
+            color: #ccc;
+            background: #777;
+        }
+    }
+}

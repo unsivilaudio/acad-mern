@@ -1,3 +1,4 @@
+import Button from '../../shared/components/UI/Button';
 import classes from './PlaceItem.module.scss';
 
 export default function PlaceItem(props) {
@@ -12,9 +13,9 @@ export default function PlaceItem(props) {
                 <p>{props.description}</p>
             </div>
             <div className={classes.Actions}>
-                <button>View On Map</button>
-                <button>Edit</button>
-                <button>Delete</button>
+                <Button disabled>View On Map</Button>
+                <Button variant='invert'>Edit</Button>
+                <Button variant='danger'>Delete</Button>
             </div>
         </li>
     );
