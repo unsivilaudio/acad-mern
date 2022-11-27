@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as LockIcon } from '../../assets/svg/iconmonstr-lock-22.svg';
 import { ReactComponent as UserIcon } from '../../assets/svg/iconmonstr-user-circle-thin.svg';
@@ -6,7 +7,9 @@ import Button from '../../shared/components/UI/Button';
 import Input from '../../shared/components/UI/Input';
 import classes from './AuthForm.module.scss';
 
-export default function AuthForm({ type = 'login' }) {
+export default function AuthForm({ type = 'login', onLogin, user }) {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [authType, setAuthType] = useState(type);
     const [formState, setFormState] = useState({
         values: {
@@ -25,6 +28,12 @@ export default function AuthForm({ type = 'login' }) {
         window.history.replaceState(null, null, `/auth/${authType}`);
     }, [authType]);
 
+    useEffect(() => {
+        if (location.state?.redirectOnAuth && user) {
+            navigate(location.state.redirectOnAuth);
+        }
+    }, [user, location.state, navigate]);
+
     function toggleAuthType() {
         setAuthType(ps => (ps === 'login' ? 'signup' : 'login'));
     }
@@ -41,6 +50,9 @@ export default function AuthForm({ type = 'login' }) {
 
     function handleSubmitAuth(e) {
         e.preventDefault();
+        if (authType === 'login') {
+            onLogin();
+        }
     }
 
     return (
