@@ -1,0 +1,62 @@
+.AuthForm {
+    margin-top: 3.5rem;
+    max-width: 60rem;
+    margin: 0 auto;
+
+    .FormHeader {
+        padding: 3rem;
+        padding-bottom: 0;
+
+        p {
+            font-size: 5.5rem;
+            font-weight: 200;
+            text-align: center;
+        }
+
+        span {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            svg {
+                height: 15rem;
+                width: 15rem;
+                fill: currentColor;
+            }
+        }
+    }
+
+    .FormControl {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .FormGroup {
+            width: 100%;
+        }
+    }
+
+    .FormActions {
+        padding-top: 2.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .SwitchAuth {
+            align-self: flex-end;
+            margin-top: 1.2rem;
+            cursor: pointer;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #cecece;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: var(--link-hover);
+                font-size: 1.8rem;
+                border-bottom: 1px solid currentColor;
+            }
+        }
+    }
+}

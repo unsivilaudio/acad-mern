@@ -22,6 +22,7 @@
     --shadow-dark: 2px 2px 3px rgba(0, 0, 0, 0.3);
 
     --nav-bg-gradient-1: linear-gradient(115deg, #fc466b 15%, #3f5efb 60%);
+    --link-hover: #fe5481;
 }
 
 * {
@@ -61,9 +62,17 @@ input {
     padding: 0.8rem 1.7rem;
 }
 
+input {
+    width: 100%;
+}
+
 button {
     cursor: pointer;
     color: var(--body-text-light);
+}
+
+label {
+    display: block;
 }
 
 @media screen and (max-width: 75em) {

@@ -6,9 +6,7 @@ export default function NavLinks(props) {
     return (
         <ul className={classes.NavLinks}>
             <li className={classes.Item}>
-                <NavLink to='/' exact>
-                    All Users
-                </NavLink>
+                <NavLink to='/'>All Users</NavLink>
             </li>
             <li className={classes.Item}>
                 <NavLink to='/u1/places'>My Places</NavLink>
@@ -17,7 +15,16 @@ export default function NavLinks(props) {
                 <NavLink to='/places/new'>Add Place</NavLink>
             </li>
             <li className={classes.Item}>
-                <NavLink to='/auth'>Login</NavLink>
+                <NavLink
+                    to='/auth/login'
+                    className={({ isActive }) => {
+                        return isActive ||
+                            window.location.pathname.includes('signup')
+                            ? 'active'
+                            : '';
+                    }}>
+                    Login
+                </NavLink>
             </li>
         </ul>
     );
