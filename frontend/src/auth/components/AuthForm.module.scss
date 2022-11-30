@@ -3,6 +3,23 @@
     max-width: 60rem;
     margin: 0 auto;
 
+    .Errors {
+        max-height: 0;
+        list-style: inside;
+        padding: 1.2rem;
+        padding-bottom: 2.2rem;
+        color: var(--body-text-dark);
+        background: var(--body-bg-light);
+        transform: scale(0);
+        transition: all 0.7s ease-in-out;
+
+        &.Show {
+            margin-top: 2.2rem;
+            max-height: 20rem;
+            transform: scale(1);
+        }
+    }
+
     .FormHeader {
         padding: 3rem;
         padding-bottom: 0;

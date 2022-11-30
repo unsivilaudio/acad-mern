@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { validateEmail, validatePassword } from '../util/validation';
 import { ReactComponent as LockIcon } from '../../assets/svg/iconmonstr-lock-22.svg';
 import { ReactComponent as UserIcon } from '../../assets/svg/iconmonstr-user-circle-thin.svg';
 import Button from '../../shared/components/UI/Button';
@@ -20,6 +21,7 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
         valid: false,
         errors: [],
     });
+    const [showErrors, setShowErrors] = useState(false);
 
     useEffect(() => {
         // TOO MANY RE-RENDERS
@@ -27,6 +29,38 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
         // HACK BELOW
         window.history.replaceState(null, null, `/auth/${authType}`);
     }, [authType]);
+
+    useEffect(() => {
+        const { email, password, passwordConfirm } = formState.values;
+        let validationErrors = [];
+        if (!email.trim().length || !password.trim().length) return;
+        const emailErrors = validateEmail(email);
+        const passwordErrors =
+            authType === 'signup' ? validatePassword(password) : [];
+        if (
+            authType === 'signup' &&
+            password.trim() !== passwordConfirm.trim()
+        ) {
+            validationErrors.push('Passwords do not match!');
+        }
+
+        validationErrors = [
+            ...emailErrors,
+            ...passwordErrors,
+            ...validationErrors,
+        ];
+
+        if (!validationErrors.length) {
+            setFormState(ps => ({ ...ps, valid: true, errors: [] }));
+        } else {
+            setFormState(ps => ({
+                ...ps,
+                valid: false,
+                errors: validationErrors,
+            }));
+        }
+        setShowErrors(false);
+    }, [formState.values, authType]);
 
     useEffect(() => {
         if (location.state?.redirectOnAuth && user) {
@@ -50,6 +84,10 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
 
     function handleSubmitAuth(e) {
         e.preventDefault();
+        if (!formState.valid) {
+            setShowErrors(true);
+            return;
+        }
         if (authType === 'login') {
             onLogin();
         }
@@ -57,6 +95,18 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
 
     return (
         <form className={classes.AuthForm} onSubmit={handleSubmitAuth}>
+            {!!formState.errors.length && (
+                <ul
+                    className={[
+                        classes.Errors,
+                        showErrors ? classes.Show : '',
+                    ].join(' ')}>
+                    <h2>Error!</h2>
+                    {formState.errors.map(err => (
+                        <li key={err}>{err}</li>
+                    ))}
+                </ul>
+            )}
             <div className={classes.FormHeader}>
                 <p>{authType === 'login' ? 'Welcome Back' : 'Sign Up'}</p>
                 <span>
@@ -72,6 +122,7 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
                         onChange={handleChangeInput}
                         placeholder='john.smith@youremail.com'
                         value={formState.values.email}
+                        required
                     />
                 </div>
                 <div className={classes.FormGroup}>
@@ -80,7 +131,9 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
                         label='Password'
                         type='password'
                         onChange={handleChangeInput}
+                        placeholder='password'
                         value={formState.values.password}
+                        required
                     />
                 </div>
                 {authType === 'signup' && (
@@ -90,7 +143,9 @@ export default function AuthForm({ type = 'login', onLogin, user }) {
                             label='Confirm Password'
                             type='password'
                             onChange={handleChangeInput}
+                            placeholder='confirm password'
                             value={formState.values.passwordConfirm}
+                            required
                         />
                     </div>
                 )}

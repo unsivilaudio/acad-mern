@@ -39,7 +39,13 @@ function App() {
                         />
                         <Route
                             path='signup'
-                            element={<AuthPage authType='signup' />}
+                            element={
+                                <AuthPage
+                                    authType='signup'
+                                    onLogin={login}
+                                    user={user}
+                                />
+                            }
                         />
                     </Route>
                     <Route element={<Protected user={user} />}>
