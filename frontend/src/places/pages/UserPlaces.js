@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import PlaceList from '../components/PlaceList';
 
@@ -34,10 +35,21 @@ const __USER_PLACES = [
 
 export default function UserPlaces(props) {
     const params = useParams();
+    const title = `Elysium | ${params.userId} user places`;
+    const description = "A list of a specific user's places.";
 
     const userPlaces = __USER_PLACES.filter(
         place => place.creator === params.userId
     );
 
-    return <PlaceList items={userPlaces} />;
+    return (
+        <>
+            <Helmet>
+                <title>{title}</title>
+                <meta property='og:title' content={title} />
+                <meta property='og:description' content={description} />
+            </Helmet>
+            <PlaceList items={userPlaces} />
+        </>
+    );
 }

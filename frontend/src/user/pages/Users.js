@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import UsersList from '../components/UsersList';
 
 const Users = props => {
@@ -23,7 +24,19 @@ const Users = props => {
         },
     ];
 
-    return <UsersList items={__USERS} />;
+    return (
+        <>
+            <Helmet>
+                <title>Elysium | All Users Page</title>
+                <meta property='og:title' content='Elysium | All Users Page' />
+                <meta
+                    property='og:description'
+                    content='Super Awesome Users Page'
+                />
+            </Helmet>
+            <UsersList items={__USERS} />
+        </>
+    );
 };
 
 export default Users;

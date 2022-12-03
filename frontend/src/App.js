@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+
 import AuthPage from './auth/pages/Auth';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
@@ -22,42 +24,44 @@ function App() {
 
     return (
         <BrowserRouter>
-            <MainNavigation onLogout={logout} />
-            <Layout>
-                <Routes>
-                    <Route path='/' element={<Users />} />
-                    <Route path='/auth'>
-                        <Route
-                            path='login'
-                            element={
-                                <AuthPage
-                                    authType='login'
-                                    onLogin={login}
-                                    user={user}
-                                />
-                            }
-                        />
-                        <Route
-                            path='signup'
-                            element={
-                                <AuthPage
-                                    authType='signup'
-                                    onLogin={login}
-                                    user={user}
-                                />
-                            }
-                        />
-                    </Route>
-                    <Route element={<Protected user={user} />}>
-                        <Route
-                            path='/:userId/places'
-                            element={<UserPlaces />}
-                        />
-                        <Route path='/places/new' element={<NewPlace />} />
-                    </Route>
-                    <Route path='*' element={<NotFoundPage />} />
-                </Routes>
-            </Layout>
+            <HelmetProvider>
+                <MainNavigation onLogout={logout} />
+                <Layout>
+                    <Routes>
+                        <Route path='/' element={<Users />} />
+                        <Route path='/auth'>
+                            <Route
+                                path='login'
+                                element={
+                                    <AuthPage
+                                        authType='login'
+                                        onLogin={login}
+                                        user={user}
+                                    />
+                                }
+                            />
+                            <Route
+                                path='signup'
+                                element={
+                                    <AuthPage
+                                        authType='signup'
+                                        onLogin={login}
+                                        user={user}
+                                    />
+                                }
+                            />
+                        </Route>
+                        <Route element={<Protected user={user} />}>
+                            <Route
+                                path='/:userId/places'
+                                element={<UserPlaces />}
+                            />
+                            <Route path='/places/new' element={<NewPlace />} />
+                        </Route>
+                        <Route path='*' element={<NotFoundPage />} />
+                    </Routes>
+                </Layout>
+            </HelmetProvider>
         </BrowserRouter>
     );
 }
